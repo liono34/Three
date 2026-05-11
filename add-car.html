@@ -22,7 +22,7 @@
 </div>
 <div class="card">
 <h2 class="title">Add New Car</h2>
-<p class="sub">Upload vehicle information</p>
+<p class="sub">Fill in all fields</p>
 <div class="input-box"><input type="text" id="brand" placeholder="Brand (e.g. Toyota)"></div>
 <div class="input-box"><input type="text" id="model" placeholder="Model (e.g. Camry)"></div>
 <div class="input-box"><input type="text" id="year" placeholder="Year"></div>
@@ -31,26 +31,37 @@
 <button class="add-btn" onclick="addCar()">Add Car</button>
 </div>
 <div class="msg" id="tip"></div>
+
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="db.js"></script>
 <script>
 particlesJS("particles",{particles:{number:{value:80},size:{value:2.5},color:{value:"#ffffff"},line_linked:{enable:true,distance:120,color:"#ffffff",opacity:.15,width:1},move:{enable:true,speed:.8,straight:false}},interactivity:{events:{onhover:{enable:true,mode:"grab"}}},retina_detect:true});
+
 DB.initDB();
-function addCar(){
-let brand=document.getElementById('brand').value.trim();
-let model=document.getElementById('model').value.trim();
-let year=document.getElementById('year').value.trim();
-let price=document.getElementById('price').value.trim();
-let color=document.getElementById('color').value.trim();
-let tip=document.getElementById('tip');
-if(!brand||!model||!year||!price||!color){tip.innerText='Please fill all fields';tip.style.color='#ff4444';return;}
-DB.addCar({brand,model,year,price,color});
-tip.innerText='✅ Car added successfully!';tip.style.color='#00ffe7';
-document.getElementById('brand').value='';
-document.getElementById('model').value='';
-document.getElementById('year').value='';
-document.getElementById('price').value='';
-document.getElementById('color').value='';
+
+function addCar() {
+    let brand = document.getElementById('brand').value.trim();
+    let model = document.getElementById('model').value.trim();
+    let year = document.getElementById('year').value.trim();
+    let price = document.getElementById('price').value.trim();
+    let color = document.getElementById('color').value.trim();
+    let tip = document.getElementById('tip');
+
+    if (!brand || !model || !year || !price || !color) {
+        tip.innerText = "Please fill all fields!";
+        tip.style.color = "#ff4444";
+        return;
+    }
+    DB.addCar({ brand, model, year, price, color });
+
+    tip.innerText = "✅ Car added successfully!";
+    tip.style.color = "#00ffe7";
+
+    document.getElementById('brand').value = "";
+    document.getElementById('model').value = "";
+    document.getElementById('year').value = "";
+    document.getElementById('price').value = "";
+    document.getElementById('color').value = "";
 }
 </script>
 </body>
