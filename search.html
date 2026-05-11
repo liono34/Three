@@ -29,22 +29,32 @@
 </div>
 </div>
 <div class="result-box">
-<h3 class="result-title">Search Results</h3>
+<h3 class="result-title">Results</h3>
 <div id="resultList"></div>
 </div>
 </div>
+
 <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="db.js"></script>
 <script>
 particlesJS("particles",{particles:{number:{value:80},size:{value:2.5},color:{value:"#ffffff"},line_linked:{enable:true,distance:120,color:"#ffffff",opacity:.15,width:1},move:{enable:true,speed:.8,straight:false}},interactivity:{events:{onhover:{enable:true,mode:"grab"}}},retina_detect:true});
+
 DB.initDB();
-function searchCar(){
-let kw=document.getElementById('keyword').value.trim();
-let list=DB.searchCars(kw);
-let html='';
-if(list.length===0){html='<div class="no-result">No matching vehicles</div>';
-}else{list.forEach(car=>{html+=`<div class="car-item">${car.brand} ${car.model} | ${car.year} | $${car.price} | ${car.color}</div>`;});}
-document.getElementById('resultList').innerHTML=html;
+
+function searchCar() {
+    let kw = document.getElementById('keyword').value.trim();
+    let list = DB.searchCars(kw);
+    let html = "";
+
+    if (list.length === 0) {
+        html = '<div class="no-result">No matching vehicles</div>';
+    } else {
+        list.forEach(car => {
+            html += `<div class="car-item">${car.brand} ${car.model} | ${car.year} | $${car.price} | ${car.color}</div>`;
+        });
+    }
+
+    document.getElementById('resultList').innerHTML = html;
 }
 </script>
 </body>
